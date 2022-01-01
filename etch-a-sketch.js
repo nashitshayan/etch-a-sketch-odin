@@ -46,7 +46,7 @@ container.addEventListener('mouseup', handleMouseUp);
 
 
 btnReset.addEventListener('click', ()=>{
-     let sqaureNum = prompt('How many squares per side? (keep \'em less than 100')
+     let sqaureNum = prompt('How many squares per side? (keep \'em less than 100)')
     //container.style.setProperty('--gridRows', sqaureNum*sqaureNum);
    // container.style.setProperty('--gridColumns', sqaureNum*sqaureNum);
     container.style.setProperty('--sideLength', sqaureNum);
