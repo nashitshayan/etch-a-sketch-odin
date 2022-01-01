@@ -47,8 +47,8 @@ container.addEventListener('mouseup', handleMouseUp);
 
 btnReset.addEventListener('click', ()=>{
      let sqaureNum = prompt('How many squares per side?')
-    container.style.setProperty('--gridRows', sqaureNum*sqaureNum);
-    container.style.setProperty('--gridColumns', sqaureNum*sqaureNum);
+    //container.style.setProperty('--gridRows', sqaureNum*sqaureNum);
+   // container.style.setProperty('--gridColumns', sqaureNum*sqaureNum);
     container.style.setProperty('--sideLength', sqaureNum);
 
     let children= Array.from(container.children);

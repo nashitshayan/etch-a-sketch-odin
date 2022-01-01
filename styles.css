@@ -28,8 +28,8 @@ body{
 .container{
     /* width: min(300px, 1100px);
     height: min(300px, 1100px); */
-    width: var(--gridRows)px;
-    height: var(--gridColumns)px;
+    width: 500px;
+    height: 500px;
     border: 5px solid #111;
     /* display: flex;
     flex-flow: row wrap;
@@ -47,7 +47,7 @@ body{
      border-right: 1px solid black;
     border-bottom: 1px solid black; 
     margin: 0 -1px -1px 0;
-    padding: 7px;
+   /* padding: 7px; */
     margin-right: -1px;
 
 
