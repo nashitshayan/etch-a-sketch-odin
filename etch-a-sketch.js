@@ -2,6 +2,10 @@
 const container= document.querySelector('.container');
 
 const btnReset = document.querySelector('.btn-reset');
+const clrInput = document.getElementById('color');
+
+
+
 
 
 //the initial 16x16 grid
@@ -33,7 +37,7 @@ const handleMouseUp= ()=>{
 }
 
 //change bg color when the mouse moves over the sq divs
-const handleMouseMove = (e)=> e.target.style.backgroundColor='red'; //child
+const handleMouseMove = (e)=> e.target.style.backgroundColor=clrInput.value; //child
 
 //add event listeners on the parent div
 container.addEventListener('mousedown',handleMouseDown );
@@ -46,16 +50,16 @@ container.addEventListener('mouseup', handleMouseUp);
 
 
 btnReset.addEventListener('click', ()=>{
-     let sqaureNum = prompt('How many squares per side? (keep \'em less than 100)')
-    //container.style.setProperty('--gridRows', sqaureNum*sqaureNum);
-   // container.style.setProperty('--gridColumns', sqaureNum*sqaureNum);
-    container.style.setProperty('--sideLength', sqaureNum);
-
     let children= Array.from(container.children);
     // console.log(childDivs.length)
       if(children.length>0)
         children.map(child=> container.removeChild(child))
      
+     let sqaureNum = prompt('How many squares per side? (keep \'em less than 100)')
+   
+    container.style.setProperty('--sideLength', sqaureNum);
+
+    
     for(let i=0; i<sqaureNum*sqaureNum; i++)
         {
              let box= document.createElement('div');

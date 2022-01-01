@@ -30,7 +30,7 @@ body{
     height: min(300px, 1100px); */
     width: 500px;
     height: 500px;
-    border: 5px solid #111;
+    border: 5px solid black;
     /* display: flex;
     flex-flow: row wrap;
     gap: 0; */
@@ -42,17 +42,21 @@ body{
     padding: 0;
 }
 .box{
-    /* height: 5px;
-    width: 5px; */
-     border-right: 1px solid black;
+    border-right: 1px solid black;
     border-bottom: 1px solid black; 
-    margin: 0 -1px -1px 0;
-   /* padding: 7px; */
-    margin-right: -1px;
-
-
 }
-
+.control-wrapper{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.control-wrapper div{
+   
+    font-size: 1.3rem;
+    
+}
 /* .box:hover{
     background-color: red;
 } */
