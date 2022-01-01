@@ -4,14 +4,15 @@
     box-sizing: border-box;
 }
 :root{
-    --gridRows : 256;
-    --gridColumns: 256;
+    --clr-bg-body : #343a40;
+    --clr-bg-main: #adb5bd;
     --sideLength: 16;
 }
 
 
 body{
-    background-color: #ccc;
+    background-color: var(--clr-bg-body);
+    color: rgb(236, 238, 240);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,7 +35,7 @@ body{
     /* display: flex;
     flex-flow: row wrap;
     gap: 0; */
-    background-color: #999;
+    background-color: var(--clr-bg-main);
     display: grid;
     grid-template-columns: repeat(var(--sideLength),1fr);
     grid-template-rows: repeat(var(--sideLength), 1fr);
@@ -44,6 +45,8 @@ body{
 .box{
     border-right: 1px solid black;
     border-bottom: 1px solid black; 
+    margin-right: -1px;
+    margin-bottom: -1px;
 }
 .control-wrapper{
     width: 400px;
