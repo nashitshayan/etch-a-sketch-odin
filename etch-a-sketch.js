@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const btnReset = document.querySelector('.btn-reset');
-const clrInput = document.getElementById('color');
+//const clrInput = document.getElementById('color');
 
 const elem = (tag) => document.createElement(tag);
 const grab = (tag) => document.querySelector(tag);
@@ -28,28 +28,15 @@ const setGridTemplate = R.curry((value, element) => {
 	element.style.setProperty('--sideLength', value);
 	return element;
 });
+const attr = R.curry((attrName, attrVal, element) => {
+	element.setAttribute(attrName, attrVal);
+	return element;
+});
 //container.style.setProperty('--sideLength', sqaureNum);
-const makeBox = () => R.compose(addClass('box'))(elem('div'));
 
-//the initial 16x16 grid
+//const onContainer = on(grab('.container'));
 
-const sketch = (gridSize, sketchBox, dispatch) => {
-	for (let i = 0; i < gridSize * gridSize; i++) {
-		R.compose(setGridTemplate(gridSize), append(makeBox()))(sketchBox);
-	}
-	// console.log(
-	// 	R.compose(setGridTemplate(gridSize), append(makeBox()))(sketchBox),
-	// );
-};
-
-sketch(16, grab('.container'));
-
-// for (let i = 0; i < 256; i++) {
-// 	let box = document.createElement('div');
-// 	box.className = 'box';
-// 	container.appendChild(box);
-// 	// console.log('box', box);
-// }
+//
 
 let childDivs = Array.from(container.children);
 
@@ -70,11 +57,28 @@ const handleMouseUp = () => {
 
 //change bg color when the mouse moves over the sq divs
 const handleMouseMove = (e) =>
-	(e.target.style.backgroundColor = clrInput.value); //child
+	(e.target.style.backgroundColor = grab('#color').value); //child
+
+const makeBox = (index) =>
+	R.compose(attr('data-index', index), addClass('box'))(elem('div'));
+
+//the initial 16x16 grid
+const sketch = (gridSize, sketchBox) => {
+	for (let i = 0; i < gridSize * gridSize; i++) {
+		R.compose(setGridTemplate(gridSize), append(makeBox(i)))(sketchBox);
+		const onSketch = on('mousemove', grab(`[data-index="${i}"]`));
+		const removeListeners = onSketch((e) => {
+			removeListeners();
+			e.target.style.backgroundColor = grab('#color').value;
+		});
+	}
+};
+//console.log(R.compose(addClass('something'), grab('.container')));
+sketch(12, grab('.container'));
 
 //add event listeners on the parent div
-container.addEventListener('mousedown', handleMouseDown);
-container.addEventListener('mouseup', handleMouseUp);
+//container.addEventListener('mousedown', handleMouseDown);
+//container.addEventListener('mouseup', handleMouseUp);
 
 const handleReset = () => {
 	let children = Array.from(container.children);
