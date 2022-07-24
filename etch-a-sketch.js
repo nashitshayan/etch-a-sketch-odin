@@ -2,19 +2,61 @@ const container = document.querySelector('.container');
 const btnReset = document.querySelector('.btn-reset');
 const clrInput = document.getElementById('color');
 
+const elem = (tag) => document.createElement(tag);
+const grab = (tag) => document.querySelector(tag);
+
+const on = R.curry((eventType, element, fn) => {
+	element.addEventListener(eventType, fn);
+	return () => element.removeEventListener(eventType, fn);
+});
+
+const addClass = R.curry((className, element) => {
+	element.classList.add(className);
+	return element;
+});
+
+const append = R.curry((node, element) => {
+	element.appendChild(node);
+	return element;
+});
+//remove
+const clear = R.curry((element) => {
+	element.innerHTML = '';
+	return element;
+});
+const setGridTemplate = R.curry((value, element) => {
+	element.style.setProperty('--sideLength', value);
+	return element;
+});
+//container.style.setProperty('--sideLength', sqaureNum);
+const makeBox = () => R.compose(addClass('box'))(elem('div'));
+
 //the initial 16x16 grid
 
-for (let i = 0; i < 256; i++) {
-	let box = document.createElement('div');
-	box.className = 'box';
-	container.appendChild(box);
-}
+const sketch = (gridSize, sketchBox, dispatch) => {
+	for (let i = 0; i < gridSize * gridSize; i++) {
+		R.compose(setGridTemplate(gridSize), append(makeBox()))(sketchBox);
+	}
+	// console.log(
+	// 	R.compose(setGridTemplate(gridSize), append(makeBox()))(sketchBox),
+	// );
+};
+
+sketch(16, grab('.container'));
+
+// for (let i = 0; i < 256; i++) {
+// 	let box = document.createElement('div');
+// 	box.className = 'box';
+// 	container.appendChild(box);
+// 	// console.log('box', box);
+// }
 
 let childDivs = Array.from(container.children);
 
 //when left-mouse is held down, apply mouseover event to all the child square divs
 const handleMouseDown = () => {
 	Array.from(container.children).map((child) => {
+		// console.log('child', child);
 		child.addEventListener('mousemove', handleMouseMove);
 	});
 };
