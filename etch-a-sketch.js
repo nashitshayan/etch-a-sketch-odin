@@ -1,5 +1,5 @@
 const handleMouseMove = (e) =>
-	(e.target.style.backgroundColor = grab('#color').value); //child
+	(e.target.style.backgroundColor = grab('#color').value);
 
 const onMove = on('mousemove', handleMouseMove);
 const handleMouseDown = () => chilrenArr(grab('.container')).map(onMove);
@@ -10,30 +10,23 @@ const handleMouseUp = () => chilrenArr(grab('.container')).map(offMove);
 const makeBox = (index) =>
 	R.compose(attr('data-index', index), addClass('box'))(elem('div'));
 
-const sketch = (gridSize, sketchBox) => {
+const sketch = (gridSize) => {
 	for (let i = 0; i < gridSize * gridSize; i++) {
-		R.compose(setGridTemplate(gridSize), append(makeBox(i)))(sketchBox);
+		R.compose(
+			setGridTemplate(gridSize),
+			append(makeBox(i)),
+		)(grab('.container'));
 	}
 };
-
-sketch(12, grab('.container'));
 
 const handleReset = () => {
-	let children = Array.from(container.children);
-	if (children.length > 0)
-		children.map((child) => container.removeChild(child));
-
-	let sqaureNum = prompt("How many squares per side? (keep 'em less than 100)");
-
-	container.style.setProperty('--sideLength', sqaureNum);
-
-	for (let i = 0; i < sqaureNum * sqaureNum; i++) {
-		let box = document.createElement('div');
-		box.className = 'box';
-		container.appendChild(box);
-	}
+	clear(grab('.container'));
+	let squares = prompt("How many squares per side? (keep 'em less than 100)");
+	sketch(squares);
 };
-//add event listeners on the parent div
+
 on('mousedown', handleMouseDown, grab('.container'));
 on('mouseup', handleMouseUp, grab('.container'));
 on('click', handleReset, grab('.btn-reset'));
+
+sketch(16);
